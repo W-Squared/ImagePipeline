@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       # Validate template
-      - name: Validate Template
+      - name: Validate Build
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
@@ -21,11 +21,11 @@ jobs:
           target: .
           
       # Initialize Build template
-      - name: Validate Template
+      - name: Initialize Plugins
         uses: hashicorp/packer-github-actions@master
         with:
           command: init
-          arguments: "-var-file=windows11-vars.pkvars.hcl -syntax-only"
+          arguments: "-var-file=windows11-vars.pkvars.hcl"
           target: .
 
       # Build artifact
