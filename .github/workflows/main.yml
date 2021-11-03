@@ -12,15 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - uses: hashicorp/packer-github-actions@v0.2.0
+      - name: Packer GitHub Actions
+        with:
+          command: init
+          arguments: "-var-file=windows11-vars.pkvars.hcl"
+          target: /windows/.
