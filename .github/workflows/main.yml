@@ -35,3 +35,7 @@ jobs:
           command: build
           arguments: "-var-file=windows11-vars.pkvars.hcl"
           target: .
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
