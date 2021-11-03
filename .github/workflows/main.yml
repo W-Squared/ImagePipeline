@@ -4,23 +4,31 @@ on:
   push:
 
 jobs:
-  packer:
+  Build-Machine:
     runs-on: ubuntu-latest
-    name: packer
+    name: Build Windows Image
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      # validate templates
+      # Validate template
       - name: Validate Template
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
           arguments: "-var-file=windows11-vars.pkvars.hcl -syntax-only"
           target: .
+          
+      # Initialize Build template
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+          arguments: "-var-file=windows11-vars.pkvars.hcl -syntax-only"
+          target: .
 
-      # build artifact
+      # Build artifact
       - name: Build Artifact
         uses: hashicorp/packer-github-actions@master
         with:
