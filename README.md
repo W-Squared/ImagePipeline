@@ -10,7 +10,7 @@ The process begins with Packer using a Service Principal to create a temp Resour
 To build the Packer code locally, use the following process:
 1.  Ensure Packer is installed and your PATH variable has been updated to look at Packer. Installation instructions: https://learn.hashicorp.com/tutorials/packer/get-started-install-cli
 2.	Clone the repository to your local machine using Azure DevOps, Git, or any Git application
-3.	Once the repository is cloned, set a local environment variable for CLIENT_SECRET. I suggest using Bash as PowerShell can be tricky. (e.g. export CLIENT_SECRET=*******) The Client Secret comes from the Service Principal with permissions to run the builds. 
+3.	Once the repository is cloned, set a local environment variable for CLIENT_SECRET, CLIENT_ID, and SUBSCRIPTION_ID. I suggest using Bash as PowerShell can be tricky. (e.g. export CLIENT_SECRET=*******) The Client Secret and ID comes from the Service Principal with permissions to run the builds. The Subscription ID comes from the subscription you are looking to deploy in.  
 4.	Run the Packer build command from the Windows directory and specificy the variable file you wish to use. The variable file will dictate which image is created and the gallery it's placed in. Example command: packer build -var-file=../../win11_vars.pkvars.hcl .
 5.	Once the build is running, keep an eye on the terminal for any errors that may occur and address accordingly
 
