@@ -18,7 +18,7 @@ jobs:
         with:
           command: validate
           arguments: "-var-file=windows11-vars.pkvars.hcl -syntax-only"
-          target: /windows/.
+          target: .
 
       # build artifact
       - name: Build Artifact
@@ -26,4 +26,4 @@ jobs:
         with:
           command: build
           arguments: "-var-file=windows11-vars.pkvars.hcl"
-          target: /windows/.
+          target: .
