@@ -1,20 +1,29 @@
-name: Run Packer Build
+name: Packer
 
 on:
   push:
-    branches: [ main ]
-    
-  workflow_dispatch:
-
 
 jobs:
-  build:
+  packer:
     runs-on: ubuntu-latest
+    name: packer
 
     steps:
-      - uses: hashicorp/packer-github-actions@v0.2.0
-      - name: Packer GitHub Actions
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      # validate templates
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
         with:
-          command: init
+          command: validate
+          arguments: "-var-file=windows11-vars.pkvars.hcl -syntax-only"
+          target: /windows/.
+
+      # build artifact
+      - name: Build Artifact
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
           arguments: "-var-file=windows11-vars.pkvars.hcl"
           target: /windows/.
