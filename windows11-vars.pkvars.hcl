@@ -1,5 +1,5 @@
-resource_group = "AVD-Image"
-gallery_name = "AVDImageGallery"
+resource_group = "WilliamSquared-Images"
+gallery_name = "WilliamSquaredCompute"
 
 image_publisher = "MicrosoftWindowsDesktop"
 image_offer     = "windows-11"
