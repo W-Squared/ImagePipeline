@@ -15,5 +15,5 @@ To build the Packer code locally, use the following process:
 5.	Once the build is running, keep an eye on the terminal for any errors that may occur and address accordingly
 
 # Contribute
-If you wish to contribute, make a development branch and a PR when you're ready. Be sure to have your PR approved before it's merged into the main branch. 
+If you wish to contribute, make a development branch and a PR when you're ready
 
