@@ -1,0 +1,71 @@
+trigger:
+  branches:
+    include:
+    - none
+pool:
+  name: <Enter Agent Pool to use>
+stages:
+- stage: __default
+  jobs:
+  - job: EnvironmentCheck
+    steps:
+    - task: CmdLine@2
+      displayName: 'Check Packer Version'
+      inputs:
+        script: packer --version
+  - job: EnvironmentVariableCheck
+    dependsOn:
+    - EnvironmentCheck
+    steps:
+    - task: CmdLine@2
+      displayName: 'Check Environment Variable in Pipeline'
+      env:
+        CLIENT_SECRET: $(CLIENT_SECRET)
+      inputs:
+        script: echo $CLIENT_SECRET
+  - job: Windows11Build
+    timeoutInMinutes: 120
+    dependsOn:
+    - EnvironmentCheck
+    - EnvironmentVariableCheck
+    steps:
+    - task: CmdLine@2
+      displayName: 'Build Windows 11 Image'
+      env:
+        CLIENT_SECRET: $(CLIENT_SECRET)
+      inputs:
+        script: |
+          cd packer/azure/windows
+          packer init .
+          packer build -var-file=<Packer Variable File> .
+  - job: Windows10Build
+    timeoutInMinutes: 120
+    dependsOn:
+    - EnvironmentCheck
+    - EnvironmentVariableCheck
+    steps:
+    - task: CmdLine@2
+      displayName: 'Build Windows 10 Image'
+      env:
+        CLIENT_SECRET: $(CLIENT_SECRET)
+      inputs:
+        script: |
+          cd packer/azure/windows
+          packer init .
+          packer build -var-file=<Packer Variable File> .
+  - job: Windows10MSBuild
+    timeoutInMinutes: 120
+    dependsOn:
+    - EnvironmentCheck
+    - EnvironmentVariableCheck
+    steps:
+    - task: CmdLine@2
+      displayName: 'Build Windows 10 MS Image'
+      env:
+        CLIENT_SECRET: $(CLIENT_SECRET)
+      inputs:
+        script: |
+          cd packer/azure/windows
+          packer init .
+          packer build -var-file=<Packer Variable File> .
+
